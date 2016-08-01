@@ -106,11 +106,32 @@
         <!--Friends-->
         <scene sceneID="81m-aW-eJP">
             <objects>
-                <tableViewController id="IVi-e5-vVP" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="slX-65-19t">
+                <tableViewController id="IVi-e5-vVP" customClass="FriendTableViewController" customModule="firebase_username_test" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="slX-65-19t" customClass="FriendTableView" customModule="firebase_username_test" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="profile" id="GbK-zI-zAp" customClass="profiletablecell" customModule="firebase_username_test" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GbK-zI-zAp" id="wHg-Xk-KjJ">
+                                    <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u9d-xk-EGK">
+                                            <rect key="frame" x="29" y="11" width="84" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="name" destination="u9d-xk-EGK" id="ykM-43-oHO"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
                         <sections/>
                         <connections>
                             <outlet property="dataSource" destination="IVi-e5-vVP" id="8Lq-Ym-ba0"/>
@@ -118,6 +139,9 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Friends" id="LDf-lg-ydg"/>
+                    <connections>
+                        <segue destination="1oZ-mh-Jck" kind="presentation" identifier="showFriend" id="gdv-Dq-KUQ"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uGx-cQ-IWb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -217,7 +241,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Save" id="Ftc-HM-X2w">
                             <connections>
                                 <action selector="saveProfile:" destination="4jw-gy-xhf" id="3Ap-Px-n53"/>
-                                <segue destination="BYZ-38-t0r" kind="presentation" identifier="SaveProfile" id="YSP-DX-Ffi"/>
+                                <segue destination="YQe-v9-njy" kind="unwind" unwindAction="unwindToMainMenu:" id="F9x-HU-ejh"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -231,7 +255,79 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4pP-9m-5yh" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="YQe-v9-njy" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2020" y="-246"/>
+            <point key="canvasLocation" x="2042" y="-246"/>
+        </scene>
+        <!--Friend View Controller-->
+        <scene sceneID="gdL-2i-34u">
+            <objects>
+                <viewController id="1oZ-mh-Jck" customClass="FriendViewController" customModule="firebase_username_test" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="N7n-G5-rHu"/>
+                        <viewControllerLayoutGuide type="bottom" id="PEA-VW-9PR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Kge-bA-6iQ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Loading..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NPF-bc-E49">
+                                <rect key="frame" x="183" y="83" width="156" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Loading..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DUA-ca-Kx5">
+                                <rect key="frame" x="183" y="41" width="156" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Loading..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IKA-Xn-bKy">
+                                <rect key="frame" x="183" y="124" width="156" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ceS-gD-muE">
+                                <rect key="frame" x="20" y="41" width="97" height="30"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" notEnabled="YES"/>
+                                </accessibility>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Hobbies" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zpr-X7-DWK">
+                                <rect key="frame" x="20" y="124" width="97" height="30"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" notEnabled="YES"/>
+                                </accessibility>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UWz-5c-4AS">
+                                <rect key="frame" x="20" y="83" width="97" height="30"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" notEnabled="YES"/>
+                                </accessibility>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IFF-P1-nfX">
+                                <rect key="frame" x="0.0" y="0.0" width="34" height="30"/>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <segue destination="mtv-eN-kVf" kind="unwind" unwindAction="unwindToMainMenu:" id="jho-QL-Oc2"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="address" destination="NPF-bc-E49" id="a70-H8-D65"/>
+                        <outlet property="hobbies" destination="IKA-Xn-bKy" id="oGu-Le-YU0"/>
+                        <outlet property="name" destination="DUA-ca-Kx5" id="Mfv-sH-zCk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aF7-cZ-B2Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="mtv-eN-kVf" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1218" y="448"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Rxm-ja-gpw">
@@ -252,7 +348,4 @@
             <point key="canvasLocation" x="1231" y="-246"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="gny-mu-y8i"/>
-    </inferredMetricsTieBreakers>
 </document>

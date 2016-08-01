@@ -64,14 +64,14 @@ class ViewController: UIViewController {
 
     func updateprofile(){
         if let name = userDefaults.objectForKey("name"){
-            self.name.text=name as! String
+            self.name.text=name as? String
         }
 
         if let address = userDefaults.objectForKey("address"){
-                self.address.text=address as! String
+                self.address.text=address as? String
         }
         if let hobbies = userDefaults.objectForKey("hobbies"){
-            self.hobbies.text=hobbies as! String
+            self.hobbies.text=hobbies as? String
         }
         if let image=userDefaults.objectForKey("hobbies")
         {
@@ -98,6 +98,8 @@ class ViewController: UIViewController {
             
         }
         userprofileref=database.child("profiles").child(userDefaults.objectForKey("userkey") as! String)
+        print(userDefaults.objectForKey("userkey") as! String)
+
         
     
     }
